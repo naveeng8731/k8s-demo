@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nginx-cronjob
+  namespace: dev
+
+spec:
+  schedule: "*/5 * * * *"
+
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          tolerations:
+          - operator: Exists
+
+          containers:
+          - name: busybox
+            image: busybox
+
+            command:
+            - /bin/sh
+            - -c
+            - date; echo "CronJob Running"
+
+          restartPolicy: OnFailure
