@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nginx-cronjob
-  namespace: dev
+  
 
 spec:
   schedule: "*/5 * * * *"
