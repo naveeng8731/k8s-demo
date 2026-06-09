@@ -3,19 +3,34 @@ kind: Ingress
 metadata:
   name: nginx-ingress
   
-
 spec:
-  rules:
-  - host: nginx.local
+  ingressClassName: nginx
 
+  rules:
+  - host: de.local
     http:
       paths:
       - path: /
         pathType: Prefix
-
         backend:
           service:
             name: nginx-service
-
             port:
               number: 80
+
+
+  - http:                   # no host = catch-all, matches IP access
+       paths:
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: nginx-service
+             port:
+               number: 80
+
+  tls:
+  - hosts:
+    - de.local
+    
+    secretName: nginx-tls
