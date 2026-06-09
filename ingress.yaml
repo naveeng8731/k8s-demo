@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: nginx-ingress
   
+
 spec:
   ingressClassName: nginx
 
@@ -33,4 +34,7 @@ spec:
   - hosts:
     - de.local
     
+  tls:
+  - hosts:
+    - de.local
     secretName: nginx-tls
