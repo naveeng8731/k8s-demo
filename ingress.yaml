@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
+  
 
 spec:
   ingressClassName: nginx
@@ -18,6 +19,21 @@ spec:
             port:
               number: 80
 
+
+  - http:                   # no host = catch-all, matches IP access
+       paths:
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: nginx-service
+             port:
+               number: 80
+
+  tls:
+  - hosts:
+    - de.local
+    
   tls:
   - hosts:
     - de.local
